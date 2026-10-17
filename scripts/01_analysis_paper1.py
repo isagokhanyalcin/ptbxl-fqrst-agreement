@@ -215,7 +215,8 @@ for (g, sx), d in ref.groupby(["agegrp", "female"], observed=True):
 for alg in ["ge", "gl"]:
     for sx, d in ref.groupby("female"):
         v = d[f"fq_{alg}"]; rows.append({"age": "all", "sex": "F" if sx else "M", "alg": alg.upper(), "n": len(v), "p2.5": v.quantile(.025), "median": v.median(), "p97.5": v.quantile(.975), "pct_gt90": 100 * (v > 90).mean()})
-T6 = pd.DataFrame(rows); T6.to_csv(f"{O}/table6_reference_values.csv", index=False)
+T6 = pd.DataFrame(rows); T6["provisional_n_lt_120"] = T6.n < 120  # CLSI EP28-A3c minimum per partition
+T6.to_csv(f"{O}/table6_reference_values.csv", index=False)
 R["ref_n"] = len(ref)
 R["ref_age_trend_ge"] = stats.spearmanr(ref.age, ref.fq_ge)[0]
 
