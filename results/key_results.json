@@ -1,0 +1,69 @@
+{
+ "flow": {
+  "all_ecgs": 21799,
+  "with_both_feature_sets": 21795,
+  "both_angles_available": 21785,
+  "after_pacing_excluded": 21492,
+  "after_indeterminate_axis_excluded": 21390,
+  "primary_first_ecg_per_patient": 18570
+ },
+ "icc_A1": {
+  "icc": 0.9596,
+  "ci": [
+   0.96,
+   0.96
+  ]
+ },
+ "prop_bias_slope": {
+  "b": -0.0256,
+  "p": 0.0
+ },
+ "crosstab3": [
+  [
+   11271,
+   563,
+   58
+  ],
+  [
+   363,
+   2749,
+   334
+  ],
+  [
+   21,
+   179,
+   3032
+  ]
+ ],
+ "lvolt_label_n": 162,
+ "lvolt_superclass": {
+  "label+meas": {
+   "MI": 34.5,
+   "STTC": 34.5,
+   "HYP": 0.0,
+   "CD": 17.2,
+   "NORM": 24.1,
+   "n": 29
+  },
+  "label only": {
+   "MI": 23.8,
+   "STTC": 23.8,
+   "HYP": 3.1,
+   "CD": 12.3,
+   "NORM": 47.7,
+   "n": 130
+  },
+  "meas only": {
+   "MI": 63.5,
+   "STTC": 25.1,
+   "HYP": 8.1,
+   "CD": 29.4,
+   "NORM": 17.1,
+   "n": 211
+  }
+ },
+ "disc_n_events": 593,
+ "disc_n": 18324,
+ "ref_n": 5471,
+ "ref_age_trend_ge": 0.118
+}
