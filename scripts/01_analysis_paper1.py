@@ -229,9 +229,9 @@ for ax, (lab, sub) in zip(axs, [("QRS < 120 ms", x[x.qrsd_ge < 120]), ("QRS ≥ 
     b, s = d_.mean(), d_.std(ddof=1)
     for yv, ls in [(b, "-"), (b - 1.96 * s, "--"), (b + 1.96 * s, "--")]:
         ax.axhline(yv, color="#1f5fbf", ls=ls, lw=1)
-    ax.text(178, b + 1.96 * s + 3, f"+1.96 SD {b + 1.96 * s:.1f}°", ha="right", color="#1f5fbf")
-    ax.text(178, b - 1.96 * s - 9, f"−1.96 SD {b - 1.96 * s:.1f}°", ha="right", color="#1f5fbf")
-    ax.text(178, b + 3, f"bias {b:.1f}°", ha="right", color="#1f5fbf")
+    ax.text(3, b + 1.96 * s + 3, f"+1.96 SD {b + 1.96 * s:.1f}°", ha="left", color="#1f5fbf")
+    ax.text(3, b - 1.96 * s - 9, f"−1.96 SD {b - 1.96 * s:.1f}°", ha="left", color="#1f5fbf")
+    ax.text(177, b + 4, f"bias {b:.1f}°", ha="right", color="#1f5fbf", bbox=dict(fc="white", ec="none", pad=1, alpha=0.85))
     ax.set_title(f"{lab} (n = {len(sub):,})"); ax.set_xlabel("Mean of GE 12SL and Glasgow fQRS-T (°)"); ax.set_xlim(0, 180); ax.set_ylim(-120, 120)
 axs[0].set_ylabel("Difference, GE 12SL − Glasgow (°)")
 fig.tight_layout(); fig.savefig(f"{O}/fig1_bland_altman.png", dpi=300); plt.close(fig)
@@ -245,6 +245,25 @@ for ax, (name, c) in zip(axs, curves.items()):
     ax.set_xlabel("1 − specificity")
 axs[0].set_ylabel("Sensitivity"); axs[0].legend(frameon=False, loc="lower right")
 fig.tight_layout(); fig.savefig(f"{O}/fig2_roc.png", dpi=300); plt.close(fig)
+
+
+# Figure 3: reference limits by age group and sex
+r6 = T6[T6.age != "all"]
+order = ["18-29", "30-39", "40-49", "50-59", "60-69", "70-79", ">=80"]
+fig, ax = plt.subplots(figsize=(6.5, 4))
+for (alg, sx), col, ls, mk in [(("GE", "M"), "#1f5fbf", "-", "o"), (("GE", "F"), "#1f5fbf", "--", "s"),
+                               (("GL", "M"), "#888888", "-", "o"), (("GL", "F"), "#888888", "--", "s")]:
+    d = r6[(r6.alg == alg) & (r6.sex == sx)].set_index("age").reindex(order)
+    ax.plot(range(len(order)), d["p97.5"], color=col, ls=ls, marker=mk, ms=4, lw=1.2,
+            label=f"{'GE 12SL' if alg == 'GE' else 'Glasgow'}, {'men' if sx == 'M' else 'women'}")
+    prov = d.provisional_n_lt_120.fillna(False).values.astype(bool)
+    if prov.any():
+        ax.plot(np.arange(len(order))[prov], d["p97.5"].values[prov], ls="none", marker=mk, ms=7, mfc="white", mec=col)
+ax.axhline(90, color="#cc3333", lw=0.8, ls=":"); ax.text(6, 91.5, "90° cut-off", color="#cc3333", fontsize=8, ha="right")
+ax.set_xticks(range(len(order))); ax.set_xticklabels([o.replace(">=", "≥") for o in order])
+ax.set_xlabel("Age group (years)"); ax.set_ylabel("97.5th percentile of frontal QRS-T angle (°)")
+ax.set_ylim(40, 100); ax.legend(frameon=False, fontsize=8, loc="lower right")
+fig.tight_layout(); fig.savefig(f"{O}/fig3_reference_limits.png", dpi=300); plt.close(fig)
 
 # ---------------- dump ----------------
 def clean(o):

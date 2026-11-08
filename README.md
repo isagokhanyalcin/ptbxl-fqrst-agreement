@@ -17,6 +17,7 @@ Both datasets are open on PhysioNet under CC BY 4.0. They are not stored in this
 pip install -r requirements.txt
 bash scripts/00_download_data.sh          # about 220 MB into data/
 python scripts/01_analysis_paper1.py data results
+python scripts/02_make_manuscript_tables.py results results/manuscript_tables.md
 ```
 
 The script writes these files to `results/`:
@@ -29,7 +30,7 @@ The script writes these files to `results/`:
 | `table4_discordance_predictors.csv` | Logistic regression for a between-program difference above 30° |
 | `table5_roc.csv` | ROC analysis with DeLong comparison |
 | `table6_reference_values.csv` | Age- and sex-specific percentiles in healthy adults |
-| `fig1_bland_altman.png`, `fig2_roc.png` | Figures |
+| `fig1_bland_altman.png`, `fig2_roc.png`, `fig3_reference_limits.png` | Figures |
 | `key_results.json` | Patient flow and summary statistics |
 
 Bootstrap steps use a fixed seed (2026), so reruns give identical numbers.
