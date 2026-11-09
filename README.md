@@ -1,6 +1,6 @@
 # Frontal QRS-T angle and low QRS voltage in PTB-XL+
 
-Analysis code for the manuscript *Agreement between two automated ECG algorithms on the frontal QRS-T angle and low QRS voltage, and age- and sex-specific reference values: an analysis of PTB-XL+* (in preparation).
+Analysis code for the manuscript *Same ECG, different angle: inter-algorithm agreement and age-specific reference limits of the frontal QRS-T angle in 18,570 ECGs from PTB-XL+* (in preparation).
 
 The study compares the GE Marquette 12SL and University of Glasgow (Uni-G) programs on the same 12-lead ECGs. It looks at four things: agreement on the frontal QRS-T angle, agreement between measured low QRS voltage and the cardiologists' low-voltage statement, the diagnostic value of the angle, and age- and sex-specific reference limits in adults with a normal ECG.
 
