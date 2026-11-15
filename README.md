@@ -37,6 +37,6 @@ Bootstrap steps use a fixed seed (2026), so reruns give identical numbers.
 
 ## Authors
 
-İsa Gökhan Yalçın, Ahmet Yunus Hatip, Furkan Çağrı Oğuzlar, Hamit Hakan Armağan, Önder Tomruk, Nesrin Gökben Beceren. Department of Emergency Medicine, Süleyman Demirel University, Isparta, Türkiye.
+İsa Gökhan Yalçın, Ahmet Yunus Hatip, Furkan Çağrı Oğuzlar. Department of Emergency Medicine, Süleyman Demirel University, Isparta, Türkiye.
 
 Contact: isayalcin@sdu.edu.tr
