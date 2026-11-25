@@ -221,7 +221,7 @@ R["ref_n"] = len(ref)
 R["ref_age_trend_ge"] = stats.spearmanr(ref.age, ref.fq_ge)[0]
 
 # ---------------- figures ----------------
-plt.rcParams.update({"font.size": 9, "font.family": "DejaVu Sans"})
+plt.rcParams.update({"font.size": 9, "font.family": "DejaVu Sans", "pdf.fonttype": 42})
 fig, axs = plt.subplots(1, 2, figsize=(10, 4.2), sharey=True)
 for ax, (lab, sub) in zip(axs, [("QRS < 120 ms", x[x.qrsd_ge < 120]), ("QRS ≥ 120 ms", x[x.qrsd_ge >= 120])]):
     d_, m_ = sub.fq_ge - sub.fq_gl, (sub.fq_ge + sub.fq_gl) / 2
@@ -234,7 +234,7 @@ for ax, (lab, sub) in zip(axs, [("QRS < 120 ms", x[x.qrsd_ge < 120]), ("QRS ≥ 
     ax.text(177, b + 4, f"bias {b:.1f}°", ha="right", color="#1f5fbf", bbox=dict(fc="white", ec="none", pad=1, alpha=0.85))
     ax.set_title(f"{lab} (n = {len(sub):,})"); ax.set_xlabel("Mean of GE 12SL and Glasgow fQRS-T (°)"); ax.set_xlim(0, 180); ax.set_ylim(-120, 120)
 axs[0].set_ylabel("Difference, GE 12SL − Glasgow (°)")
-fig.tight_layout(); fig.savefig(f"{O}/fig1_bland_altman.png", dpi=300); plt.close(fig)
+fig.tight_layout(); fig.savefig(f"{O}/fig1_bland_altman.png", dpi=300); fig.savefig(f"{O}/fig1_bland_altman.pdf"); plt.close(fig)
 
 fig, axs = plt.subplots(1, 5, figsize=(14, 3.2), sharey=True)
 for ax, (name, c) in zip(axs, curves.items()):
@@ -244,7 +244,7 @@ for ax, (name, c) in zip(axs, curves.items()):
     ax.plot([0, 1], [0, 1], color="#cccccc", lw=0.8); ax.set_title(f"{name}\nAUC {r.auc_ge:.3f} vs {r.auc_gl:.3f}")
     ax.set_xlabel("1 − specificity")
 axs[0].set_ylabel("Sensitivity"); axs[0].legend(frameon=False, loc="lower right")
-fig.tight_layout(); fig.savefig(f"{O}/fig2_roc.png", dpi=300); plt.close(fig)
+fig.tight_layout(); fig.savefig(f"{O}/fig2_roc.png", dpi=300); fig.savefig(f"{O}/fig2_roc.pdf"); plt.close(fig)
 
 
 # Figure 3: reference limits by age group and sex
@@ -263,7 +263,7 @@ ax.axhline(90, color="#cc3333", lw=0.8, ls=":"); ax.text(6, 91.5, "90° cut-off"
 ax.set_xticks(range(len(order))); ax.set_xticklabels([o.replace(">=", "≥") for o in order])
 ax.set_xlabel("Age group (years)"); ax.set_ylabel("97.5th percentile of frontal QRS-T angle (°)")
 ax.set_ylim(40, 100); ax.legend(frameon=False, fontsize=8, loc="lower right")
-fig.tight_layout(); fig.savefig(f"{O}/fig3_reference_limits.png", dpi=300); plt.close(fig)
+fig.tight_layout(); fig.savefig(f"{O}/fig3_reference_limits.png", dpi=300); fig.savefig(f"{O}/fig3_reference_limits.pdf"); plt.close(fig)
 
 # ---------------- dump ----------------
 def clean(o):
